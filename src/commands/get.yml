@@ -6,3 +6,4 @@ steps:
   - run:
       name: Getting My IP
       command: curl icanhazip.com
+
