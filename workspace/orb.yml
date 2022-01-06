@@ -8,7 +8,7 @@ display:
     source_url: https://www.github.com/EXAMPLE_ORG/EXAMPLE_PROJECT
 
 commands:
-    get-ip:
+    get:
         description: |
             This command echos "ip address" a curl query.
         steps:
@@ -24,9 +24,9 @@ executors:
             - image: cimg/base:stable
 
 jobs:
-    get:
+    hello:
         description: |
             Sample description
         executor: default
         steps:
-            - get-ip
+            - get
