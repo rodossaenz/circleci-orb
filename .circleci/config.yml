@@ -18,7 +18,7 @@ parameters:
 orbs:
   # Replace this with your own!
   my-orb: rodossaenz/myip@<<pipeline.parameters.dev-orb-version>>
-  orb-tools: circleci/orb-tools@10.0
+  orb-tools: circleci/orb-tools@10.1.0
 
 jobs:
   initialize-orb:
