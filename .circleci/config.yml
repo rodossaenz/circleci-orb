@@ -22,8 +22,7 @@ orbs:
 
 jobs:
   initialize-orb:
-    docker:
-      - image: cimg/base:stable
+    executor: orb-tools/ubuntu
     steps:
       - checkout
       - run: circleci namespace create $NAMESPACE $VCS_TYPE $VCS_ORG --no-prompt
