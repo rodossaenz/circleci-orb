@@ -28,7 +28,7 @@ jobs:
       - checkout
       #- cli/install
       - cli/setup:
-          token: $CIRCLE_TOKEN
+          token: CIRCLE_TOKEN
       - run: circleci namespace create $NAMESPACE $VCS_TYPE $VCS_ORG --no-prompt
       - run: circleci orb create $NAMESPACE/$ORB_NAME --private --no-prompt
       - run: circleci orb publish workspace/orb.yml $NAMESPACE/$ORB_NAME@<<pipeline.parameters.dev-orb-version>>
