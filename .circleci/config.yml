@@ -13,7 +13,7 @@ parameters:
       This value is automatically adjusted by the "trigger-integration-tests-workflow" job to correspond with the specific version created by the commit and should not be edited.
       A "dev:alpha" version must exist for the initial pipeline run.
     type: string
-    default: "dev:alpha"
+    default: "dev:1"
 
 orbs:
   # Replace this with your own!
@@ -27,8 +27,8 @@ jobs:
       - image: cimg/base:stable
     steps:
       - checkout
-      # "greet" is a sample command packaged with this orb config.
-      # This sample integration test will run as long as the greet command exists. Once you remove the greet command you should remove this line.
+      # "get" is a sample command packaged with this orb config.
+      # This sample integration test will run as long as the get command exists. Once you remove the greet command you should remove this line.
       # Push new changes first, before adding new tests to your config.
       - myip/get
 
