@@ -1,9 +1,0 @@
-description: >
-  This command echos "ip address" a curl query.
-# What will this command do?
-# Descriptions should be short, simple, and clear.
-steps:
-  - run:
-      name: Getting My IP
-      command: curl icanhazip.com
-

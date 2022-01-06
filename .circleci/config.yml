@@ -35,28 +35,15 @@ jobs:
       - myip/get
 
 workflows:
-  # Prior to producing a development orb (which requires credentials) basic validation, linting, and even unit testing can be performed.
-  # This workflow will run on every commit
-  test-pack:
-    unless: << pipeline.parameters.run-integration-tests >>
+  publish-dev-workflow:
     jobs:
       - orb-tools/lint # Lint Yaml files
-      - orb-tools/pack # Pack orb source
-      - shellcheck/check:
-          dir: ./src/scripts
-          exclude: SC2148
-      # optional: Run BATS tests against your scripts
-      - bats/run:
-          path: ./src/tests
       # Publish development version(s) of the orb.
       - orb-tools/publish-dev:
           orb-name: rodossaenz/myip
           context: orb-publishing # A restricted context containing your private publishing credentials. Will only execute if approved by an authorized user.
           requires:
             - orb-tools/lint
-            - orb-tools/pack
-            - bats/run
-            - shellcheck/check
       # Trigger an integration workflow to test the
       # dev:${CIRCLE_SHA1:0:7} version of your orb
       - orb-tools/trigger-integration-tests-workflow:
@@ -74,22 +61,3 @@ workflows:
     jobs:
       # Run any integration tests defined within the `jobs` key.
       - integration-test-1
-      # Publish a semver version of the orb. relies on
-      # the commit subject containing the text "[semver:patch|minor|major|skip]"
-      # as that will determine whether a patch, minor or major
-      # version will be published or if publishing should
-      # be skipped.
-      # e.g. [semver:patch] will cause a patch version to be published.
-      - orb-tools/dev-promote-prod-from-commit-subject:
-          orb-name: rodossaenz/myip
-          context: orb-publishing
-          add-pr-comment: false
-          fail-if-semver-not-indicated: true
-          publish-version-tag: false
-          requires:
-            - integration-test-1
-          filters:
-            branches:
-              only:
-                - master
-                - main
