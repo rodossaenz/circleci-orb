@@ -40,7 +40,6 @@ workflows:
       - orb-tools/publish-dev:
           orb-name: rodossaenz/myip
           checkout: true
-          workspace-root: "."
           context: orb-publishing # A restricted context containing your private publishing credentials. Will only execute if approved by an authorized user.
           requires:
             - orb-tools/lint
