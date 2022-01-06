@@ -47,7 +47,7 @@ workflows:
           context: orb-publishing
       - orb-tools/lint:
           requires:
-            - initialize-orb
+            - initialize
       # Publish development version(s) of the orb.
       - orb-tools/publish-dev:
           orb-name: $NAMESPACE/$ORB_NAME
