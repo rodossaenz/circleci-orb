@@ -1,12 +1,5 @@
 version: 2.1
 
-orbs:
-  # Replace this with your own!
-  myip: rodossaenz/myip@<<pipeline.parameters.dev-orb-version>>
-  orb-tools: circleci/orb-tools@10.0
-  bats: circleci/bats@1.0
-  shellcheck: circleci/shellcheck@2.0
-
 # Pipeline Parameters
 ## These parameters are used internally by orb-tools. Skip to the Jobs section.
 parameters:
@@ -22,6 +15,11 @@ parameters:
     type: string
     default: "dev:alpha"
 
+orbs:
+  # Replace this with your own!
+  my-ip: rodossaenz/myip@<<pipeline.parameters.dev-orb-version>>
+  orb-tools: circleci/orb-tools@10.0
+
 jobs:
   # Define one or more jobs which will utilize your orb's commands and parameters to validate your changes.
   integration-test-1:
@@ -32,7 +30,7 @@ jobs:
       # "greet" is a sample command packaged with this orb config.
       # This sample integration test will run as long as the greet command exists. Once you remove the greet command you should remove this line.
       # Push new changes first, before adding new tests to your config.
-      - myip/get
+      - my-ip/get
 
 workflows:
   publish-dev-workflow:
