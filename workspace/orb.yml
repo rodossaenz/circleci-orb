@@ -1,5 +1,4 @@
 version: 2.1
-
 commands:
     get:
         description: |
@@ -18,15 +17,13 @@ commands:
         steps:
             - run:
                 command: echo <<parameters.something>>
-                name: Echo something in parameter 
-
+                name: Echo something in parameter
 executors:
     default:
         description: |
             This is a sample executor using Docker and Node.
         docker:
             - image: cimg/base:stable
-
 jobs:
     hello:
         description: |
