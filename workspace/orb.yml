@@ -1,12 +1,5 @@
 version: 2.1
 
-description: |
-    Sample orb description
-
-display:
-    home_url: https://www.website.com/docs
-    source_url: https://www.github.com/EXAMPLE_ORG/EXAMPLE_PROJECT
-
 commands:
     get:
         description: |
@@ -15,6 +8,17 @@ commands:
             - run:
                 command: curl icanhazip.com
                 name: Getting My IP
+    echo:
+        description: |
+            This command echos something in parameter.
+        parameters:
+            something:
+                type: string
+                default: CIRCLECI OR SQUARECI
+        steps:
+            - run:
+                command: echo <<parameters.something>>
+                name: Echo something in parameter 
 
 executors:
     default:
@@ -26,7 +30,9 @@ executors:
 jobs:
     hello:
         description: |
-            Sample description
+            Hello, give me the IP address using this job through the step an command
         executor: default
         steps:
             - get
+            - echo:
+                something: TRIANGLE
