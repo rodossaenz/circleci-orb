@@ -1,0 +1,32 @@
+version: 2.1
+
+description: |
+    Sample orb description
+
+display:
+    home_url: https://www.website.com/docs
+    source_url: https://www.github.com/EXAMPLE_ORG/EXAMPLE_PROJECT
+
+commands:
+    get-ip:
+        description: |
+            This command echos "ip address" a curl query.
+        steps:
+            - run:
+                command: curl icanhazip.com
+                name: Getting My IP
+
+executors:
+    default:
+        description: |
+            This is a sample executor using Docker and Node.
+        docker:
+            - image: cimg/base:stable
+
+jobs:
+    get:
+        description: |
+            Sample description
+        executor: default
+        steps:
+            - get-ip
