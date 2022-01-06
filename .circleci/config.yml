@@ -18,16 +18,17 @@ parameters:
 orbs:
   # Replace this with your own!
   my-orb: rodossaenz/myip@<<pipeline.parameters.dev-orb-version>>
+  cli: circleci/circleci-cli@0.1.9
   orb-tools: circleci/orb-tools@10.0
 
 jobs:
-  initialize-orb:
-    docker:
-      - image: cimg/base:stable
+  initialize:
+    executor: cli/default
     steps:
-      - run: sudo su
-      - run: curl -fLSs https://raw.githubusercontent.com/CircleCI-Public/circleci-cli/master/install.sh | bash
       - checkout
+      #- cli/install
+      - cli/setup:
+          token: $CIRCLE_TOKEN
       - run: circleci namespace create $NAMESPACE $VCS_TYPE $VCS_ORG --no-prompt
       - run: circleci orb create $NAMESPACE/$ORB_NAME --private --no-prompt
       - run: circleci orb publish workspace/orb.yml $NAMESPACE/$ORB_NAME@<<pipeline.parameters.dev-orb-version>>
@@ -42,7 +43,8 @@ workflows:
   publish-dev-workflow:
     unless: << pipeline.parameters.run-integration-tests >>
     jobs:
-      - initialize-orb
+      - initialize:
+          context: orb-publishing
       - orb-tools/lint:
           requires:
             - initialize-orb
