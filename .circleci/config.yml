@@ -17,7 +17,8 @@ parameters:
 
 orbs:
   # Replace this with your own!
-  my-orb: rodossaenz/myip@<<pipeline.parameters.dev-orb-version>>
+  # These are environment variables
+  my-orb: $NAMESPACE/$ORB_NAME@<<pipeline.parameters.dev-orb-version>>
   cli: circleci/circleci-cli@0.1.9
   orb-tools: circleci/orb-tools@10.0
 
