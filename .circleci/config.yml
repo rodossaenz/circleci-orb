@@ -29,13 +29,13 @@ jobs:
       #- cli/install
       - cli/setup:
           token: CIRCLE_TOKEN
-      - run: 
+      - run:
           name: CircleCI Create Namespace
           command: bash -c "circleci namespace create $NAMESPACE $VCS_TYPE $VCS_ORG --no-prompt; if [[ \$? -eq 0 ]] ; then exit 1 ; else exit 0 ; fi"
-      - run: 
+      - run:
           name: CircleCI Create Private Orb
           command: bash -c "circleci orb create $NAMESPACE/$ORB_NAME --private --no-prompt; if [[ \$? -eq 0 ]] ; then exit 1 ; else exit 0 ; fi"
-      - run: 
+      - run:
           name: CircleCI Publish Orb Dev Version
           command: circleci orb publish workspace/orb.yml $NAMESPACE/$ORB_NAME@<<pipeline.parameters.dev-orb-version>>
   integration-test-1:
@@ -80,4 +80,3 @@ workflows:
       - my-orb/hello:
           requires:
             - integration-test-1
-
